@@ -1,0 +1,405 @@
+openapi: 3.0.0
+info:
+  version: '1.0'
+  title: OZON API
+  contact:
+    name: Ponomar Dmitry
+    email: dmitry.ponomar@gmail.com
+servers:
+  - url: 'https://example.com/v1.0'
+    description: Live Server
+tags:
+  - name: Customer
+    description: |
+      Methods for customer
+  - name: Product
+    description: |
+      Methods for products
+  - name: Order
+    description: |
+      Methods for orders
+security:
+  - SecretApiKey: []
+  - JWT: []
+paths:
+  /customers:
+    get:
+      tags:
+        - Customer
+      summary: Get customers data
+      operationId: GetCustomers
+      description: |
+        Get customers data
+      responses:
+        '200':
+          description: Customers data has been found
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Customer'
+        '401':
+          description: Access forbidden
+    post:
+      tags:
+        - Customer
+      summary: Create new customer
+      operationId: PostCustomer
+      description: |
+        Create new customer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+      responses:
+        '200':
+          description: Customer has been succesfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        '401':
+          description: Access forbidden
+        '422':
+          description: Invalid data
+  '/customer/{id}':
+    get:
+      tags:
+        - Customer
+      summary: Get customer by ID
+      operationId: GetCustomer
+      description: |
+        Get customer by ID
+      responses:
+        '200':
+          description: Customer data has been found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        '401':
+          description: Access forbidden
+        '404':
+          description: Not found
+    patch:
+      tags:
+        - Customer
+      summary: Update customer data
+      operationId: PatchCustomer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+      responses:
+        '201':
+          description: Customer has been updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        '401':
+          description: Access forbidden
+        '404':
+          description: Not found
+        '409':
+          description: Customer exists and can't be updated
+        '422':
+          description: Invalid data
+    delete:
+      tags:
+        - Customer
+      summary: Delete customer by ID
+      operationId: DeleteCustomer
+      description: |
+        Delete customer by ID
+      responses:
+        '204':
+          description: Customer has been deleted
+        '401':
+          description: Access forbidden
+        '402':
+          description: Can't be deleted
+        '404':
+          description: Not found
+  '/customer-orders/{customerId}':
+    get:
+      tags:
+        - Order
+      summary: Get all orders by clientId
+      operationId: GetOrdersByCustomerId
+      description: |
+        Get all orders by customerId
+      responses:
+        '200':
+          description: Orders info has been found
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+        '401':
+          description: Access Forbidden
+        '404':
+          description: Not found
+  /order:
+    post:
+      tags:
+        - Order
+      summary: Create new order
+      operationId: PostOrder
+      description: |
+        Create new order
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+      responses:
+        '200':
+          description: Order has been succesfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '401':
+          description: Access forbidden
+        '422':
+          description: Invalid data
+  '/order/{id}':
+    get:
+      tags:
+        - Order
+      summary: Get order by ID
+      operationId: GetOrder
+      description: |
+        Get order by ID
+      responses:
+        '200':
+          description: Order data has been found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '401':
+          description: Access forbidden
+        '404':
+          description: Not found
+    patch:
+      tags:
+        - Order
+      summary: Update order data
+      operationId: PatchOrder
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+      responses:
+        '201':
+          description: Order has been updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '401':
+          description: Access forbidden
+        '404':
+          description: Not found
+        '409':
+          description: Order exists and can't be updated
+        '422':
+          description: Invalid data
+    delete:
+      tags:
+        - Order
+      summary: Delete Order by ID
+      operationId: DeleteOrder
+      description: |
+        Delete order by ID
+      responses:
+        '204':
+          description: Order has been deleted
+        '401':
+          description: Access forbidden
+        '402':
+          description: Can't be deleted
+        '404':
+          description: Not found
+  /products:
+    get:
+      tags:
+        - Product
+      summary: Get products data
+      operationId: GetProducts
+      description: |
+        Get products data
+      responses:
+        '200':
+          description: Products data has been found
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+        '401':
+          description: Access forbidden
+    post:
+      tags:
+        - Product
+      summary: Create new product
+      operationId: PostProduct
+      description: |
+        Create new product
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      responses:
+        '200':
+          description: Product has been succesfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '401':
+          description: Access forbidden
+        '422':
+          description: Invalid data
+  '/product/{id}':
+    get:
+      tags:
+        - Product
+      summary: Get product by ID
+      operationId: GetProduct
+      description: |
+        Get product by ID
+      responses:
+        '200':
+          description: Product data has been found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '401':
+          description: Access forbidden
+        '404':
+          description: Not found
+    patch:
+      tags:
+        - Product
+      summary: Update product data
+      operationId: PatchProduct
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      responses:
+        '201':
+          description: Product has been updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '401':
+          description: Access forbidden
+        '404':
+          description: Not found
+        '409':
+          description: Product exists and can't be updated
+        '422':
+          description: Invalid data
+    delete:
+      tags:
+        - Product
+      summary: Delete Product by ID
+      operationId: DeleteProduct
+      description: |
+        Delete product by ID
+      responses:
+        '204':
+          description: Product has been deleted
+        '401':
+          description: Access forbidden
+        '402':
+          description: Can't be deleted
+        '404':
+          description: Not found
+components:
+  schemas:
+    Customer:
+      type: object
+      required:
+        - name
+        - phone
+        - password
+      properties:
+        id:
+          description: Customer's ID
+          readOnly: true
+          type: integer
+        name:
+          description: Customer's name
+          type: string
+          maxLength: 255
+        password:
+          description: Customer's password
+          type: string
+          format: password
+          writeOnly: true
+        address:
+          description: Customer's address
+          type: string
+        phone:
+          description: Customer's phone number
+          type: string
+    Product:
+      type: object
+      required:
+        - name
+        - price
+      properties:
+        id:
+          description: Product's identifier
+          readOnly: true
+          type: integer
+        name:
+          description: Product's name
+          type: string
+          example: French Potato
+        description:
+          description: Product's description
+          type: string
+        price:
+          description: Product's price
+          type: number
+        status:
+          description: Product's status
+          type: integer
+    Order:
+      type: object
+      properties:
+        id:
+          description: Order's ID
+          readOnly: true
+          type: integer
+        products:
+          description: Products list
+          type: array
+          items:
+            allOf:
+              - $ref: '#/components/schemas/Product'
+        customer:
+          description: Customer
+          allOf:
+            - $ref: '#/components/schemas/Customer'
+        bill:
+          description: Bill
+          type: number
+          example: 1564

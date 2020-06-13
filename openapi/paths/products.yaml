@@ -1,0 +1,41 @@
+get:
+  tags:
+    - Product
+  summary: Get products data
+  operationId: GetProducts
+  description: |
+    Get products data
+  responses:
+    '200':
+      description: Products data has been found
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/Product.yaml
+    '401':
+      description: Access forbidden
+post:
+  tags:
+    - Product
+  summary: Create new product
+  operationId: PostProduct
+  description: |
+    Create new product
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Product.yaml
+  responses:
+    '200':
+      description: Product has been succesfully created
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Product.yaml
+    '401':
+      description: Access forbidden
+    '422':
+      description: Invalid data

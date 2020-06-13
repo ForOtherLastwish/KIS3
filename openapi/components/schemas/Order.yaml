@@ -1,0 +1,20 @@
+type: object
+properties:
+  id:
+    description: Order's ID
+    readOnly: true
+    type: integer
+  products:
+    description: Products list
+    type: array
+    items:
+      allOf:
+        - $ref: ./Product.yaml
+  customer:
+    description: Customer
+    allOf:
+      - $ref: ./Customer.yaml
+  bill:
+    description: Bill
+    type: number
+    example: 1564

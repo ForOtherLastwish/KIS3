@@ -1,0 +1,22 @@
+type: object
+required:
+  - name
+  - price
+properties:
+  id:
+    description: Product's identifier
+    readOnly: true
+    type: integer
+  name:
+    description: Product's name
+    type: string
+    example: French Potato
+  description:
+    description: Product's description
+    type: string
+  price:
+    description: Product's price
+    type: number
+  status:
+    description: Product's status
+    type: integer

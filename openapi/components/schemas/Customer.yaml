@@ -1,0 +1,25 @@
+type: object
+required:
+  - name
+  - phone
+  - password
+properties:
+  id:
+    description: Customer's ID
+    readOnly: true
+    type: integer
+  name:
+    description: Customer's name
+    type: string
+    maxLength: 255
+  password:
+    description: Customer's password
+    type: string
+    format: password
+    writeOnly: true
+  address:
+    description: Customer's address
+    type: string
+  phone:
+    description: Customer's phone number
+    type: string

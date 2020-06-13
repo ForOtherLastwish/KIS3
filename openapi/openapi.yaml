@@ -1,0 +1,38 @@
+openapi: 3.0.0
+info:
+  version: '1.0'
+  title: OZON API
+  contact:
+    name: Ponomar Dmitry
+    email: dmitry.ponomar@gmail.com
+servers:
+  - url: 'https://example.com/v1.0'
+    description: Live Server
+tags:
+  - name: Customer
+    description: |
+      Methods for customer
+  - name: Product
+    description: |
+      Methods for products
+  - name: Order
+    description: |
+      Methods for orders
+security:
+  - SecretApiKey: []
+  - JWT: []
+paths:
+  /customers:
+    $ref: ./paths/customers.yaml
+  /customer/{id}:
+    $ref: ./paths/customer@{id}.yaml
+  /customer-orders/{customerId}:
+    $ref: ./paths/customer-orders@{customerId}.yaml
+  /order:
+    $ref: ./paths/order.yaml
+  /order/{id}:
+    $ref: ./paths/order@{id}.yaml
+  /products:
+    $ref: ./paths/products.yaml
+  /product/{id}:
+    $ref: ./paths/product@{id}.yaml
